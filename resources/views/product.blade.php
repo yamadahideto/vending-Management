@@ -71,7 +71,7 @@
     @if (Route::has('login'))
     <div class="top-right links">
       @auth
-      <a href="{{ url('https://www.netflix.com/jp/') }}"> 新規登録 </a>
+      <a href="{{ url('/product/register') }}"> 新規登録 </a>
       <a href="{{ url('/home') }}">Home</a>
       @else
       <a href="{{ route('login') }}">Login</a>

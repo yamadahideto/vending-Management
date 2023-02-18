@@ -10,4 +10,17 @@ class Product extends Model
     $products = DB::table('products')->get();
     return $products;
   }
+
+  public function register_product($data){
+    DB::table('products')->insert([
+      'company_id' => $data->company_id,
+      'product_name' => $data->product_name,
+      'price' => $data->price,
+      'stock' => $data->stock,
+      'comment' => $data->comment,
+      'img_path' => $data->img_path,
+      'created_at' => date("Y-m-d H:i:s"),
+      'updated_at' => date("Y-m-d H:i:s")
+    ]);
+  }
 }

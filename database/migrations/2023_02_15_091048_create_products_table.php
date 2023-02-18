@@ -20,8 +20,8 @@ class CreateProductsTable extends Migration
 			$table->string('product_name');
 			$table->integer('price');
 			$table->integer('stock');
-			$table->text('comment')->nullable()->change();
-			$table->string('img_path')->nullable()->change();
+			$table->text('comment')->nullable();
+			$table->string('img_path')->nullable();
 			$table->timestamps();
 
 			$table->foreign('company_id')->references('id')->on('companies');
@@ -35,8 +35,9 @@ class CreateProductsTable extends Migration
 	 */
 	public function down()
 	{
-		Schema::dropIfExists('products');
-			$table->text('comment')->nullable('false')->change();
-			$table->string('img_path')->nullable('false')->change();
-	}
+		Schema::dropIfExists('products', function (Blueprint $table){
+    $table->text('comment')->nullable('false');
+    $table->string('img_path')->nullable('false');
+    });
+  }
 }

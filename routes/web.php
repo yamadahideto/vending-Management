@@ -19,3 +19,6 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/product', 'ProductController@showList')->name('list');
+Route::get('/product/register','ProductController@register')->name('register');
+Route::post('/product/register', 'ProductController@register_product')->name('submit');
+

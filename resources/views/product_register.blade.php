@@ -1,0 +1,71 @@
+@extends('layouts.app')
+
+@section('content')
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header">商品情報登録</div>
+        <div class="card-body">
+          <form action="{{route("submit")}}" method="post" enctype="multipart/form-data">
+            @csrf
+            <div class="form-group">
+              <label for="name"> メーカー: </label>
+              <!-- <input type="number" name="company_id" placeholder="会社名"> -->
+              @if($errors->has('company_id'))
+              <p>{{ $errors->first('company_id') }}</p>
+              @endif
+              <select name="company_id" type="number" placeholder="会社名">
+                <option value="0">会社名を選択</option>
+                <option value="1">キッコーマン</option>
+                <option value="2">日清食品</option>
+                <option value="3">日本食研</option>
+              </select>
+              <!-- プルダウンでDBから会社名取得をする -->
+            </div>
+
+            <div class="form-group">
+              <label for="name"> 商品名: </label>
+              <input type="text" name="product_name" placeholder="商品名を入力してください" value="{{old('product_name')}}">
+              @if($errors->has('product_name'))
+              <p>{{ $errors->first('product_name') }}</p>
+              @endif
+            </div>
+            <div class="form-group">
+              <label for="name"> 価格: </label>
+              <input type="number" name="price" placeholder="価格" value="{{old('price')}}">
+              @if($errors->has('price'))
+              <p>{{ $errors->first('price') }}</p>
+              @endif
+            </div>
+
+            <div class="form-group">
+              <label for="name"> 在庫数: </label>
+              <input type="number" name="stock" placeholder="在庫数" value="{{old('stock')}}">
+              @if($errors->has('stock'))
+              <p>{{ $errors->first('stock') }}</p>
+              @endif
+            </div>
+
+            <div class="form-group">
+              <label for="name"> コメント: </label>
+              <textarea placeholder="商品コメント" name="comment"> {{old('comment')}} </textarea>
+              @if($errors->has('comment'))
+              <p>{{ $errors->first('comment') }}</p>
+              @endif
+            </div>
+
+            <div class="form-group">
+              <label for="name"> 商品画像: </label>
+              <input type="file" name="img_path" placeholder="商品画像" value="{{old('img_path')}}">
+              <!-- 商品画像をファイルから登録 -->
+            </div>
+            <button type="submit"> 登録 </button>
+          </form>
+          <a class="navbar-brand" href="{{ url('/product') }}"> 戻る</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+@endsection
