@@ -24,7 +24,7 @@ class ProductRequest extends FormRequest
     public function rules()
     {
       return [
-        'company_id' => 'required | numeric',
+        'company_id' => 'required',
         'product_name' => 'required | string',
         'price' => 'required | numeric',
         'stock' => 'required | numeric',
@@ -49,7 +49,7 @@ class ProductRequest extends FormRequest
   {
     return[
       'company_id.required' => ':attributeは必須項目です。',
-      'company_id.numeric' => ':attributeは数値形式で入力してください。',
+      // 'company_id.numeric' => ':attributeは数値形式で入力してください。',
       'product_name.required' => ':attributeは必須項目です。',
       'price.required' => ':attributeは必須項目です。',
       'price.numeric' => ':attributeは数値形式で入力してください。',

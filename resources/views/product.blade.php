@@ -9,61 +9,7 @@
 
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;600&display=swap" rel="stylesheet">
-
-  <!-- Styles -->
-  <style>
-    html,
-    body {
-      background-color: #fff;
-      color: #636b6f;
-      font-family: 'Nunito', sans-serif;
-      font-weight: 200;
-      height: 100vh;
-      margin: 0;
-    }
-
-    .full-height {
-      height: 100vh;
-    }
-
-    .flex-center {
-      align-items: center;
-      display: flex;
-      justify-content: center;
-    }
-
-    .position-ref {
-      position: relative;
-    }
-
-    .top-right {
-      position: absolute;
-      right: 10px;
-      top: 18px;
-    }
-
-    .content {
-      text-align: center;
-    }
-
-    .title {
-      font-size: 84px;
-    }
-
-    .links>a {
-      color: #636b6f;
-      padding: 0 25px;
-      font-size: 13px;
-      font-weight: 600;
-      letter-spacing: .1rem;
-      text-decoration: none;
-      text-transform: uppercase;
-    }
-
-    .m-b-md {
-      margin-bottom: 30px;
-    }
-  </style>
+  <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 </head>
 
 <body>
@@ -95,6 +41,8 @@
               <th>商品名</th>
               <th>価格</th>
               <th>在庫</th>
+              <th>コメント</th>
+              <th>メーカー</th>
             </tr>
           </thead>
           <tbody>
@@ -103,19 +51,12 @@
               <td>{{ $product->product_name }}</td>
               <td>{{ $product->price }}</td>
               <td>{{ $product->stock }}</td>
+              <td>{{ $product->comment }}</td>
+              <td>{{ $product->company_id }}</td>
             </tr>
             @endforeach
           </tbody>
         </table>
-        <!-- <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://vapor.laravel.com">Vapor</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a> -->
-
       </div>
     </div>
   </div>

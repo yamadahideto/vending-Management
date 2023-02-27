@@ -3,6 +3,7 @@
 namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use App\Models\company;
 
 class Product extends Model
 {
@@ -22,5 +23,9 @@ class Product extends Model
       'created_at' => date("Y-m-d H:i:s"),
       'updated_at' => date("Y-m-d H:i:s")
     ]);
+  }
+
+  public function company(){
+    return $this->belongsTo('App\Models\company');
   }
 }

@@ -12,15 +12,15 @@
             <div class="form-group">
               <label for="name"> メーカー: </label>
               <!-- <input type="number" name="company_id" placeholder="会社名"> -->
+              <select name="company_id" type="number" placeholder="会社名">
+                <option hidden></option>
+                <option value="0">キッコーマン</option>
+                <option value="1">日清食品</option>
+                <option value="2">日本食研</option>
+              </select>
               @if($errors->has('company_id'))
               <p>{{ $errors->first('company_id') }}</p>
               @endif
-              <select name="company_id" type="number" placeholder="会社名">
-                <option value="0">会社名を選択</option>
-                <option value="1">キッコーマン</option>
-                <option value="2">日清食品</option>
-                <option value="3">日本食研</option>
-              </select>
               <!-- プルダウンでDBから会社名取得をする -->
             </div>
 

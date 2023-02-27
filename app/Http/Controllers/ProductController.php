@@ -10,8 +10,9 @@ class ProductController extends Controller
 {
   public function showList(){
     $model = new Product();
-    $Products= $model->getList();
-    return view('product',['products'=> $Products]);
+    $Products = $model->getList();
+    // $Products = $model->company();
+    return view('product', ['products' => $Products]);
   }
 
   // public function register(){
@@ -22,7 +23,7 @@ class ProductController extends Controller
     return view('product_register');
   }
 
-  public function register_product(ProductRequest $request)
+  public function entry_product(ProductRequest $request)
   {
     DB::beginTransaction();
     try {
@@ -33,6 +34,7 @@ class ProductController extends Controller
       DB::rollback();
       return back();
     }
-    return redirect(route('register'));
+    // return redirect(route('postRegister'));
+    return redirect(route('list'));
   }
 }
