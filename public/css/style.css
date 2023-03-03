@@ -54,9 +54,13 @@ th,td{
   width: 200px;
   height: 50px;
   font-size: 120%;
-  /* overflow:auto; */
 }
 
-/* tbody{
-  overflow:auto;
-} */
+thead, tbody {
+  display: block;
+}
+tbody {
+  overflow-x: hidden;
+  overflow-y: scroll;
+  height: 450px;
+}

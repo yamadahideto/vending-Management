@@ -8,7 +8,7 @@
   <title>Vending-management</title>
 
   <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;600&display=swap" rel="stylesheet">
+  <!-- <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;600&display=swap" rel="stylesheet"> -->
   <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 </head>
 
@@ -52,7 +52,7 @@
               <td>{{ $product->price }}</td>
               <td>{{ $product->stock }}</td>
               <td>{{ $product->comment }}</td>
-              <td>{{ $product->company_id }}</td>
+              <td>{{ $product->company->company_name }}</td>
             </tr>
             @endforeach
           </tbody>
