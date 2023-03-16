@@ -23,6 +23,7 @@ class ProductRequest extends FormRequest
      */
     public function rules()
     {
+    // バリデーションのルールを記述
       return [
         'company_id' => 'required',
         'product_name' => 'required | string',
@@ -47,6 +48,7 @@ class ProductRequest extends FormRequest
 
   public function messages()
   {
+    // エラーメッセージを定義
     return[
       'company_id.required' => ':attributeは必須項目です。',
       // 'company_id.numeric' => ':attributeは数値形式で入力してください。',

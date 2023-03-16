@@ -33,6 +33,24 @@
         <!-- Vending-management -->
         ProductList
       </div>
+      <!-- 商品名検索窓 -->
+      <form class="productSearch" action="{{route('list')}}" method="get">
+        <div class="formGroup">
+          <label for="name"> 商品名: </label>
+          <input type="search" name="keyword" value="{{request('search')}}" placeholder="商品を検索">
+          <!-- </div> //inputのvalueをvalue=” request (‘search’) ”にする事で入力すると値がURLに反映される -->
+          <!-- // 商品名検索窓 -->
+          <!-- ↓プルダウンでDBから会社名取得 -->
+          <label for="name"> メーカー: </label>
+          <select name="company_id" type="number" placeholder="会社名">
+            <option value="" selected hidden> 選択してください </option> <!-- 初期値を設定 -->
+            @foreach ($companies as $company)
+            <option value={{ $company->id }}>{{ $company->company_name }}</option>
+            @endforeach
+            <!-- //プルダウンでDBから会社名取得 -->
+            <input type="submit" value="検索">
+
+      </form>
 
       <div class="links">
         <table>

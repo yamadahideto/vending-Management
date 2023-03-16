@@ -11,23 +11,25 @@
             @csrf
             <div class="form-group">
               <label for="name"> メーカー: </label>
-              <!-- <input type="number" name="company_id" placeholder="会社名"> -->
               <select name="company_id" type="number" placeholder="会社名">
-                <option hidden></option>
-                <option value="0">キッコーマン</option>
-                <option value="1">日清食品</option>
-                <option value="2">日本食研</option>
+                <!-- プルダウンでDBから会社名取得 -->
+                <option value="" selected hidden> 選択してください </option> <!-- 初期値を設定 -->
+                @foreach ($companies as $company)
+                <option value={{ $company->id }}>{{ $company->company_name }}</option>
+                @endforeach
+                <!-- / プルダウンでDBから会社名取得 -->
               </select>
+
               @if($errors->has('company_id'))
-              <p>{{ $errors->first('company_id') }}</p>
+              <p>{{ $errors->first('company_id')}}</p>
               @endif
-              <!-- プルダウンでDBから会社名取得をする -->
             </div>
 
             <div class="form-group">
               <label for="name"> 商品名: </label>
               <input type="text" name="product_name" placeholder="商品名を入力してください" value="{{old('product_name')}}">
               @if($errors->has('product_name'))
+              <!-- エラー出力 -->
               <p>{{ $errors->first('product_name') }}</p>
               @endif
             </div>
@@ -35,6 +37,7 @@
               <label for="name"> 価格: </label>
               <input type="number" name="price" placeholder="価格" value="{{old('price')}}">
               @if($errors->has('price'))
+              <!-- エラー出力 -->
               <p>{{ $errors->first('price') }}</p>
               @endif
             </div>
@@ -43,6 +46,7 @@
               <label for="name"> 在庫数: </label>
               <input type="number" name="stock" placeholder="在庫数" value="{{old('stock')}}">
               @if($errors->has('stock'))
+              <!-- エラー出力 -->
               <p>{{ $errors->first('stock') }}</p>
               @endif
             </div>
@@ -50,7 +54,7 @@
             <div class="form-group">
               <label for="name"> コメント: </label>
               <textarea placeholder="商品コメント" name="comment"> {{old('comment')}} </textarea>
-              @if($errors->has('comment'))
+              @if($errors->has('comment')) <!-- エラー出力 -->
               <p>{{ $errors->first('comment') }}</p>
               @endif
             </div>

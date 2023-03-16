@@ -19,6 +19,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/product', 'ProductController@showList')->name('list');
+// ↑ '/product'にアクセス時、ProductControllerのshowList()を呼び出す
 Route::get('/product/register','ProductController@register')->name('postRegister');
-Route::post('/product/register', 'ProductController@entry_product')->name('submit');
+Route::post('/product/register', 'ProductController@entryProduct')->name('submit');
 

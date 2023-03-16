@@ -8,12 +8,13 @@ use App\Models\company;
 class Product extends Model
 {
   public function getList(){
-    // $products = DB::table('products')->get(); ↑クエリビルダの書き方 (クエリビルダの場合はSQLのような書き方になる。)
-    $products = Product::all();  //エロクアントの書き方
+      $products = Product::all(); // DB (Productsテーブル) から全件取得 eloquentの書き方
+    // $products = DB::table('products')->get(); ← クエリビルダの書き方 (クエリビルダの場合はSQLのような書き方になる。)
     return $products;
   }
 
   public function register_product($data){
+    // Productsテーブルにインサート処理
     DB::table('products')->insert([
       'company_id' => $data->company_id,
       'product_name' => $data->product_name,
