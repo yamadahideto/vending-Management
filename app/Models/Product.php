@@ -14,14 +14,17 @@ class Product extends Model
   }
 
   public function register_product($data){
-    // Productsテーブルにインサート処理
-    DB::table('products')->insert([
+    //'public/storageに画像ファイルを保存
+    $path = $data->file('img_path')->store('storage');
+    $data->file('img_path')->storeAs('public', $path);
+
+    DB::table('products')->insert([ // Productsテーブルにインサート処理
       'company_id' => $data->company_id,
       'product_name' => $data->product_name,
       'price' => $data->price,
       'stock' => $data->stock,
       'comment' => $data->comment,
-      'img_path' => $data->img_path,
+      'img_path' => $path,
       'created_at' => date("Y-m-d H:i:s"),
       'updated_at' => date("Y-m-d H:i:s")
     ]);

@@ -54,14 +54,16 @@
             <div class="form-group">
               <label for="name"> コメント: </label>
               <textarea placeholder="商品コメント" name="comment"> {{old('comment')}} </textarea>
-              @if($errors->has('comment')) <!-- エラー出力 -->
+              @if($errors->has('comment'))
+              <!-- エラー出力 -->
               <p>{{ $errors->first('comment') }}</p>
               @endif
             </div>
 
             <div class="form-group">
               <label for="name"> 商品画像: </label>
-              <input type="file" name="img_path" placeholder="商品画像" value="{{old('img_path')}}">
+              <input type="file" name="img_path" placeholder="商品画像" value="{{old('img_path')}}">　
+              <!-- <input type="file" name="img_path" placeholder="商品画像"> -->
               <!-- 商品画像をファイルから登録 -->
             </div>
             <button type="submit"> 登録 </button>

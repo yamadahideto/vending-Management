@@ -61,6 +61,9 @@
               <th>在庫</th>
               <th>コメント</th>
               <th>メーカー</th>
+              <th>詳細</th>
+              <th>編集</th>
+              <th>削除</th>
             </tr>
           </thead>
           <tbody>
@@ -71,6 +74,15 @@
               <td>{{ $product->stock }}</td>
               <td>{{ $product->comment }}</td>
               <td>{{ $product->company->company_name }}</td>
+              <td><a href="{{ route("detail", $product->id) }}"> 詳細 </a> </td>
+              <td><a> 編集 </a></td>
+              <td>
+                <form action="{{route("destroy", $product->id)}}" method="post">
+                  @csrf
+                  <button type="submit"> 削除 </button>
+                </form>
+              </td>
+              <!-- <td> <a href="{{route("destroy", $product->id)}}"> 削除</a> </td> -->
             </tr>
             @endforeach
           </tbody>

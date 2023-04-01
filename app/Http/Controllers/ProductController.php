@@ -6,6 +6,7 @@ use App\Models\Product;
 use App\Models\company;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\ProductRequest;
+use Symfony\Component\VarDumper\VarDumper;
 
 class ProductController extends Controller
 {
@@ -40,7 +41,11 @@ class ProductController extends Controller
     $companies = $model->companyNameList();
     return view('product_register', ['companies' => $companies]);
     // viewの'product_register'にcompaniesという変数で$companies返す
+    //第二引数は"['渡す先での変数名' => 今回渡す変数]"
   }
+
+
+
 
   public function entryProduct(ProductRequest $request)
   {
@@ -54,7 +59,19 @@ class ProductController extends Controller
       DB::rollback();
       return back();
     }
-    // return redirect(route('postRegister'));
+    return redirect(route('list'));
+  }
+
+  public function detail($id){
+    // 詳細情報取得
+    $product = Product::find($id);
+    return view('detail', ['detailProduct' => $product]);
+  }
+
+  public function destroy($id){
+    // 削除処理
+    $product = Product::find($id);
+    $product->delete();
     return redirect(route('list'));
   }
 }
