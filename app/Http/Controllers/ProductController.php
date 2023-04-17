@@ -44,9 +44,6 @@ class ProductController extends Controller
     //第二引数は"['渡す先での変数名' => 今回渡す変数]"
   }
 
-
-
-
   public function entryProduct(ProductRequest $request)
   {
     // DB登録処理
@@ -62,10 +59,28 @@ class ProductController extends Controller
     return redirect(route('list'));
   }
 
+  public function updateProduct(ProductRequest $request, $id){
+
+    // DB更新処理
+    DB::beginTransaction();
+    try {
+      $model = new Product();
+      $model->update_product($request, $id);
+      DB::commit();
+    } catch (\Exception $e) {
+      DB::rollback();
+      return back();
+    }
+    return redirect(route('list'));
+  }
+
   public function detail($id){
     // 詳細情報取得
     $product = Product::find($id);
-    return view('detail', ['detailProduct' => $product]);
+    $model = new Company();
+    $companies = $model->companyNameList();
+    return view ("detail", compact("companies", "product"));
+    // return view('detail', ['detailProduct' => $product]);
   }
 
   public function destroy($id){

@@ -27,5 +27,7 @@ Route::get('/product/register','ProductController@register')->name('postRegister
 Route::post('/product/register', 'ProductController@entryProduct')->name('submit');
 // 詳細画面表示↓
 Route::get('detail/{id}', 'ProductController@detail')->name('detail');
+// 更新処理
+Route::post('update/{id}', 'ProductController@updateProduct')->name('update');
 //削除処理↓
 Route::post('/destroy/{id}', 'ProductController@destroy')->name('destroy');

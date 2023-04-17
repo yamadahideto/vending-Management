@@ -1,30 +1,15 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <title>Vending-management</title>
-
-  <!-- Fonts -->
-  <!-- <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;600&display=swap" rel="stylesheet"> -->
-  <link href="{{ asset('css/style.css') }}" rel="stylesheet">
-</head>
-
+@extends('layouts.app')
+<link href="{{ asset('css/style.css') }}" rel="stylesheet">
+@section('content')
 <body>
   <div class="flex-center position-ref full-height">
     @if (Route::has('login'))
     <div class="top-right links">
       @auth
-      <a href="{{ url('/product/register') }}"> 新規登録 </a>
-      <a href="{{ url('/home') }}">Home</a>
+
       @else
       <a href="{{ route('login') }}">Login</a>
 
-      @if (Route::has('register'))
-      <a href="{{ route('register') }}">Register</a>
-      @endif
       @endauth
     </div>
     @endif
@@ -34,23 +19,29 @@
         ProductList
       </div>
       <!-- 商品名検索窓 -->
-      <form class="productSearch" action="{{route('list')}}" method="get">
-        <div class="formGroup">
-          <label for="name"> 商品名: </label>
-          <input type="search" name="keyword" value="{{request('search')}}" placeholder="商品を検索">
-          <!-- </div> //inputのvalueをvalue=” request (‘search’) ”にする事で入力すると値がURLに反映される -->
-          <!-- // 商品名検索窓 -->
-          <!-- ↓プルダウンでDBから会社名取得 -->
-          <label for="name"> メーカー: </label>
-          <select name="company_id" type="number" placeholder="会社名">
-            <option value="" selected hidden> 選択してください </option> <!-- 初期値を設定 -->
-            @foreach ($companies as $company)
-            <option value={{ $company->id }}>{{ $company->company_name }}</option>
-            @endforeach
-            <!-- //プルダウンでDBから会社名取得 -->
-            <input type="submit" value="検索">
+      <div class="top_content">
+        <form class="productSearch" action="{{route('list')}}" method="get">
+          <div class="formGroup">
+            <label for="name"> 商品名: </label>
+            <input type="search" name="keyword" value="{{request('search')}}" placeholder="商品を検索">
+            <!-- </div> //inputのvalueをvalue=” request (‘search’) ”にする事で入力すると値がURLに反映される -->
+            <!-- // 商品名検索窓 -->
+            <!-- ↓プルダウンでDBから会社名取得 -->
+            <label for="name"> メーカー: </label>
+            <select name="company_id" type="number" placeholder="会社名">
+              <option value="" selected hidden> 選択してください </option> <!-- 初期値を設定 -->
+              @foreach ($companies as $company)
+              <option value={{ $company->id }}>{{ $company->company_name }}</option>
+              @endforeach
+              <!-- //プルダウンでDBから会社名取得 -->
+              <input type="submit" value="検索">
+          </div>
+        </form>
 
-      </form>
+        <button class="newRegisterBtn">
+          <a href="{{ url('/product/register') }}"> 新規登録 </a>
+        </button>
+      </div>
 
       <div class="links">
         <table>
@@ -62,7 +53,7 @@
               <th>コメント</th>
               <th>メーカー</th>
               <th>詳細</th>
-              <th>編集</th>
+              <!-- <th>編集</th> -->
               <th>削除</th>
             </tr>
           </thead>
@@ -74,12 +65,14 @@
               <td>{{ $product->stock }}</td>
               <td>{{ $product->comment }}</td>
               <td>{{ $product->company->company_name }}</td>
-              <td><a href="{{ route("detail", $product->id) }}"> 詳細 </a> </td>
-              <td><a> 編集 </a></td>
+              <td>
+                <button class="editBtn">
+                  <a href="{{ route("detail", $product->id) }}"> 詳細 </a> </td>
+              </button>
               <td>
                 <form action="{{route("destroy", $product->id)}}" method="post">
                   @csrf
-                  <button type="submit"> 削除 </button>
+                  <button id="deleteBtn" class="deleteBtn" type="submit"> 削除 </button>
                 </form>
               </td>
               <!-- <td> <a href="{{route("destroy", $product->id)}}"> 削除</a> </td> -->
@@ -91,5 +84,4 @@
     </div>
   </div>
 </body>
-
-</html>
+@endsection

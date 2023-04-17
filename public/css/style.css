@@ -7,6 +7,49 @@ body {
   margin: 0;
 }
 
+.top_content{
+  display: flex;
+  justify-content: center;
+  padding-bottom: 0px;
+}
+
+.newRegisterBtn{
+  height: 35px;
+  width: 70px;
+  font-size: 13px;
+  border-radius: 5px;
+  margin-left: 100px;
+  background-color: F7FAFC;
+  color: black;
+  text-decoration:none;
+}
+
+.deleteBtn{
+  height: 35px;
+  width: 60px;
+  font-size: 13px;
+  border-radius: 5px;
+  position: relative;
+  top: 10px;
+  left: 60px;
+  background-color: F7FAFC;
+}
+
+.editBtn{
+  height: 35px;
+  width: 60px;
+  font-size: 13px;
+  border-radius: 5px;
+  position: relative;
+  left: 30%;
+  background-color: F7FAFC;
+
+}
+
+.img_path{
+  visibility: hidden;
+}
+
 .full-height {
   height: 100vh;
 }
