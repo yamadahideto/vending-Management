@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const comment = document.getElementById("comment");
   const img_path = document.getElementById("img_path");
 
-
+// 編集ボタン押下で入力できるようにする
   document.getElementById('edit_btn').addEventListener('click', function () {
     alert("編集しますか？");
     if(product_name.readOnly == true){

@@ -16,6 +16,20 @@ class Product extends Model
     return $products;
   }
 
+  public function Search_product($keyword,$company){
+    // 検索処理
+    $products = Product::query();
+    if (!empty($keyword)) {
+      $products->where("product_name", "LIKE", "%{$keyword}%");
+    }
+    if (!empty($company)) {
+      $products->where("company_id", $company);
+    }
+    $products = $products->get();
+
+    return $products;
+  }
+
   public function register_product($data)
   {
     if($data->img_path != null){
@@ -48,7 +62,7 @@ class Product extends Model
       $path = $request->img_path;
       // 画像ファイルなければスルーして登録
     }
-    //update処理 種等したidを更新
+    //update処理 取得したidを更新
     DB::table('products')->where('id', $id)->update([
       'company_id' => $request->company_id,
       'product_name' => $request->product_name,

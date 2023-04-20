@@ -11,22 +11,13 @@ use Symfony\Component\VarDumper\VarDumper;
 class ProductController extends Controller
 {
   public function showList(Request $request){
-    $keyword = $request->input('keyword');
-    $company = $request->input('company_id');
     $model = new Product();
-    $products = $model->getList();
+    $keyword = $request->input('keyword'); //<input name= "keyword">のパラメーター取得
+    $company = $request->input('company_id');//<input name= "company_id">のパラメーター取得
+    $products = $model->Search_product($keyword, $company);
     $companyModel = new Company();
     $companies = $companyModel->companyNameList();
-    $products = Product::query();
-    if (!empty($keyword)) {
-      // $products = Product::where("product_name", "LIKE", "%{$keyword}%")->where("company_id",$request->company_id)->get();
-      $products->where("product_name", "LIKE", "%{$keyword}%");
-    }
 
-    if (!empty($company)){
-      $products->where("company_id",$company);
-    }
-    $products = $products->get();
     return view('product')->with([
       'products' => $products,
       'companies' => $companies
