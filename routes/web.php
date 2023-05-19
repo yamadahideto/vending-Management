@@ -20,7 +20,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 // 商品一覧ページ表示 '/product'にアクセス時、ProductControllerのshowList()を呼び出す
-Route::get('/product', 'ProductController@showList')->name('list');
+Route::get('/product/list', 'ProductController@showList')->name('list');
 // 新規投稿画面↓
 Route::get('/product/register','ProductController@register')->name('postRegister');
 // 新規登録処理↓

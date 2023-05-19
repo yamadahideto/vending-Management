@@ -1,5 +1,5 @@
 @extends('layouts.app')
-<script src="../../public/js/product.js"> </script>
+<script src="../../public/js/detail.js"> </script>
 <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 @section('content')
 <div class="container">

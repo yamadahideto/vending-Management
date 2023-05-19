@@ -13,6 +13,20 @@ body {
   padding-bottom: 0px;
 }
 
+/* 検索窓 価格・在庫検索 */
+.rangeArea{
+  width: 60px;
+}
+
+.formGroup-2{
+  display: flex;
+  justify-content: space-between;
+}
+
+.culumnName{
+  cursor: pointer;
+}
+
 .newRegisterBtn{
   height: 35px;
   width: 70px;

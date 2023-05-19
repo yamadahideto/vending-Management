@@ -14,7 +14,12 @@ class ProductController extends Controller
     $model = new Product();
     $keyword = $request->input('keyword'); //<input name= "keyword">のパラメーター取得
     $company = $request->input('company_id');//<input name= "company_id">のパラメーター取得
-    $products = $model->Search_product($keyword, $company);
+    $priceFrom = $request->input('priceRangeFrom'); //<input name = "priceRangeFrom">のパラメータ取得
+    $priceTo = $request->input('priceRangeTo');  //<input name = "priceRangeTo">のパラメータ取得
+    $stockFrom = $request->input('stockRangeFrom');
+    $stockTo = $request->input('stockRangeTo');
+    // Search_productにinputで取得した引数を渡して検索処理
+    $products = $model->Search_product($keyword, $company, $priceFrom, $priceTo, $stockFrom, $stockTo);
     $companyModel = new Company();
     $companies = $companyModel->companyNameList();
 

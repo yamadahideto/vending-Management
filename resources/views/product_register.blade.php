@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+<script src="../../public/js/product.js"> </script>
 @section('content')
 <div class="container">
   <div class="row justify-content-center">
@@ -57,7 +57,7 @@
               <input type="file" name="img_path" placeholder="商品画像" value="{{old('img_path')}}">　
               <!-- 商品画像をファイルから登録 -->
             </div>
-            <button type="submit"> 登録 </button>
+            <button id = regBtn type="submit"> 登録 </button>
           </form>
           <a class="navbar-brand" href="{{ url('/product') }}"> 戻る</a>
         </div>

@@ -16,7 +16,7 @@ class Product extends Model
     return $products;
   }
 
-  public function Search_product($keyword,$company){
+  public function Search_product($keyword,$company,$priceFrom,$priceTo, $stockFrom, $stockTo){
     // 検索処理
     $products = Product::query();
     if (!empty($keyword)) {
@@ -25,8 +25,17 @@ class Product extends Model
     if (!empty($company)) {
       $products->where("company_id", $company);
     }
-    $products = $products->get();
+    if(!empty($priceFrom or $priceTo)){
+      // 価格範囲検索
+      $products->whereBetween("price",[$priceFrom, $priceTo]);
+    }
 
+    if (!empty($stockFrom or $stockTo)) {
+      // 価格範囲検索
+      $products->whereBetween("stock", [$stockFrom, $stockTo]);
+    }
+
+    $products = $products->get();
     return $products;
   }
 
