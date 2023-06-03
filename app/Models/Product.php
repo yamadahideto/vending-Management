@@ -6,9 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use App\Models\company;
 use Illuminate\Http\Request;
+use Kyslik\ColumnSortable\Sortable;
 
 class Product extends Model
 {
+  use Sortable;
   public function getList()
   {
     $products = Product::all(); // DB (Productsテーブル) から全件取得 eloquentの書き方
@@ -18,24 +20,34 @@ class Product extends Model
 
   public function Search_product($keyword,$company,$priceFrom,$priceTo, $stockFrom, $stockTo){
     // 検索処理
-    $products = Product::query();
+    $products = Product::query(); //クエリ生成
     if (!empty($keyword)) {
+      // 商品名検索
       $products->where("product_name", "LIKE", "%{$keyword}%");
     }
     if (!empty($company)) {
+      //会社名検索
       $products->where("company_id", $company);
     }
-    if(!empty($priceFrom or $priceTo)){
-      // 価格範囲検索
-      $products->whereBetween("price",[$priceFrom, $priceTo]);
+
+    // 価格範囲検索
+    if (!empty($priceFrom) && !empty($priceTo)) {
+      $products->where("price", ">=", $priceFrom)->where("price", "<=", $priceTo);
+    } elseif (!empty($priceFrom)) {
+      $products->where("price", ">=", $priceFrom);
+    } elseif (!empty($priceTo)) {
+      $products->where("price", "<=", $priceTo);
     }
 
-    if (!empty($stockFrom or $stockTo)) {
-      // 価格範囲検索
-      $products->whereBetween("stock", [$stockFrom, $stockTo]);
+    if (!empty($stockFrom) && !empty($stockTo)) {
+      // 在庫範囲検索
+      $products->where("stock", ">=",$stockFrom)->where("stock", "<=", $stockTo);
+    } elseif(!empty($stockFrom)){
+      $products->where("stock", ">=", $stockFrom);
+    } elseif(!empty($stockTo)){
+      $products->where("stock", "<=", $stockTo);
     }
-
-    $products = $products->get();
+    $products = $products->get();  // データ取得
     return $products;
   }
 

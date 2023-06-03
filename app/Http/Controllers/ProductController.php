@@ -6,23 +6,31 @@ use App\Models\Product;
 use App\Models\company;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\ProductRequest;
+use Illuminate\Support\Facades\Session;
 use Symfony\Component\VarDumper\VarDumper;
+use Illuminate\Support\Facades\Log;
 
 class ProductController extends Controller
 {
-  public function showList(Request $request){
+
+  public function showList(Request $request)
+  {
     $model = new Product();
     $keyword = $request->input('keyword'); //<input name= "keyword">のパラメーター取得
-    $company = $request->input('company_id');//<input name= "company_id">のパラメーター取得
+    $company = $request->input('company_id'); //<input name= "company_id">のパラメーター取得
     $priceFrom = $request->input('priceRangeFrom'); //<input name = "priceRangeFrom">のパラメータ取得
     $priceTo = $request->input('priceRangeTo');  //<input name = "priceRangeTo">のパラメータ取得
     $stockFrom = $request->input('stockRangeFrom');
     $stockTo = $request->input('stockRangeTo');
-    // Search_productにinputで取得した引数を渡して検索処理
-    $products = $model->Search_product($keyword, $company, $priceFrom, $priceTo, $stockFrom, $stockTo);
     $companyModel = new Company();
     $companies = $companyModel->companyNameList();
-
+    if ($keyword != null || $company != null || $priceTo != null || $priceFrom != null || $stockFrom != null || $stockTo != null) {
+      // Search_productにinputで取得した引数を渡して検索処理
+      $products = $model->Search_product($keyword, $company, $priceFrom, $priceTo, $stockFrom, $stockTo);
+    }
+    else{
+      $products = Product::sortable()->get();
+    }
     return view('product')->with([
       'products' => $products,
       'companies' => $companies
@@ -30,6 +38,18 @@ class ProductController extends Controller
     // return view('product', ['products' => $Products]);
     // viewのproductに'products'という変数で$productsを返す
   }
+
+  // public function showList(Request $request){
+  //   $products = Product::sortable()->get();
+  //   $companyModel = new Company();
+  //   $companies = $companyModel->companyNameList();
+  //   return view('product')->with([
+  //     'products' => $products,
+  //     'companies' => $companies
+  //   ]);
+  //   // return view('product', ['products' => $Products]);
+  //   // viewのproductに'products'という変数で$productsを返す
+  // }
 
   public function register()
   {
@@ -81,8 +101,17 @@ class ProductController extends Controller
 
   public function destroy($id){
     // 削除処理
+    Log::info("info ログ!");
     $product = Product::find($id);
     $product->delete();
-    return redirect(route('list'));
+    // dd("aaa");
+    // return redirect(route('list'));
   }
+
+  // public function destroy(Request $request){
+  //   // 削除処理
+  //   $product = Product::findOrFail($request->id);
+  //   $product->delete();
+  //   return redirect(route('list'));
+  // }
 }

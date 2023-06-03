@@ -56,7 +56,7 @@
             </div>
           </div>
           <!-- //価格・在庫検索 -->
-          <input type="submit" value="検索">
+          <input type="submit" value="検索" class="searchBtn">
         </form>
 
         <button class="newRegisterBtn">
@@ -68,11 +68,19 @@
         <table>
           <thead>
             <tr class="culumnName">
-              <th class="productName">商品名</th>
+              <!-- <th class="productName">商品名</th>
               <th class="price">価格</th>
               <th class="stock">在庫</th>
               <th class="comment">コメント</th>
               <th class="company">メーカー</th>
+              <th>詳細</th>
+              <th>削除</th> -->
+
+              <th scope="col">@sortablelink("product_name", "商品名", $products)</th>
+              <th class="price">@sortablelink("price", "価格", $products)</th>
+              <th class="stock"> @sortablelink("stock", "在庫", $products)</th>
+              <th class="comment"> @sortablelink("comment", "コメント", $products)</th>
+              <th class="company"> @sortablelink("company_id", "メーカー", $products)</th>
               <th>詳細</th>
               <th>削除</th>
             </tr>
@@ -90,10 +98,10 @@
                   <a href="{{ route("detail", $product->id) }}"> 詳細 </a> </td>
               </button>
               <td>
-                <form action="{{route("destroy", $product->id)}}" method="post">
-                  @csrf
-                  <button id="deleteBtn" class="deleteBtn" type="submit"> 削除 </button>
-                </form>
+                <!-- <form action="{{route("destroy", $product->id)}}" method="post" data-id="{{$product->id}}">
+                  @csrf -->
+                  <button data-product_id="{{$product->id}}" id="deleteBtn" class="deleteBtn" > 削除 </button>
+                <!-- </form> -->
               </td>
               <!-- <td> <a href="{{route("destroy", $product->id)}}"> 削除</a> </td> -->
             </tr>
