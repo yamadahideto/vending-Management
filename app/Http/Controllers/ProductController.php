@@ -101,11 +101,10 @@ class ProductController extends Controller
 
   public function destroy($id){
     // 削除処理
-    Log::info("info ログ!");
+    // Log::info("info ログ!");
     $product = Product::find($id);
     $product->delete();
-    // dd("aaa");
-    // return redirect(route('list'));
+    return response()->json(['message' => '削除が成功しました']);
   }
 
   // public function destroy(Request $request){

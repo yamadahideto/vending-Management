@@ -45,12 +45,9 @@ document.addEventListener("DOMContentLoaded", function () {
         url: "http://localhost:8888/Vending-management/public/destroy/" + id,
         dataType: "json",
         success: function (response) { // 削除が成功した場合の処理
-          alert(id);
-          console.log(response);
-          console.log("成功しました");
+          alert(id + "の削除が成功しました!");
         },
-        error: function (xhr, status, error) { // エラー時の処理
-          alert(id + "失敗しました");
+        error: function (response,xhr, status, error) { // エラー時の処理
           console.error("error" + error);
           console.log("response", xhr.responseText);
         }
