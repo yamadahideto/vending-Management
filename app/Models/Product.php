@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\company;
 use Illuminate\Http\Request;
 use Kyslik\ColumnSortable\Sortable;
+use Illuminate\Support\Facades\Log;
 
 class Product extends Model
 {
@@ -48,6 +49,8 @@ class Product extends Model
       $products->where("stock", "<=", $stockTo);
     }
     $products = $products->get();  // データ取得
+
+    // $products = response()->json($products, 200);
     return $products;
   }
 

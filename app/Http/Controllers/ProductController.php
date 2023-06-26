@@ -16,6 +16,20 @@ class ProductController extends Controller
   public function showList(Request $request)
   {
     $model = new Product();
+    $companyModel = new Company();
+    $companies = $companyModel->companyNameList();
+    $products = Product::sortable()->get();
+    return view('product')->with([
+      'products' => $products,
+      'companies' => $companies
+    ]);
+    // return view('product', ['products' => $Products]);
+    // viewのproductに'products'という変数で$productsを返す
+  }
+
+  public function searchList(Request $request)
+  {
+    $model = new Product();
     $keyword = $request->input('keyword'); //<input name= "keyword">のパラメーター取得
     $company = $request->input('company_id'); //<input name= "company_id">のパラメーター取得
     $priceFrom = $request->input('priceRangeFrom'); //<input name = "priceRangeFrom">のパラメータ取得
@@ -27,29 +41,11 @@ class ProductController extends Controller
     if ($keyword != null || $company != null || $priceTo != null || $priceFrom != null || $stockFrom != null || $stockTo != null) {
       // Search_productにinputで取得した引数を渡して検索処理
       $products = $model->Search_product($keyword, $company, $priceFrom, $priceTo, $stockFrom, $stockTo);
-    }
-    else{
+    } else {
       $products = Product::sortable()->get();
     }
-    return view('product')->with([
-      'products' => $products,
-      'companies' => $companies
-    ]);
-    // return view('product', ['products' => $Products]);
-    // viewのproductに'products'という変数で$productsを返す
+    return response()->json(['products' => $products]);
   }
-
-  // public function showList(Request $request){
-  //   $products = Product::sortable()->get();
-  //   $companyModel = new Company();
-  //   $companies = $companyModel->companyNameList();
-  //   return view('product')->with([
-  //     'products' => $products,
-  //     'companies' => $companies
-  //   ]);
-  //   // return view('product', ['products' => $Products]);
-  //   // viewのproductに'products'という変数で$productsを返す
-  // }
 
   public function register()
   {
@@ -101,16 +97,9 @@ class ProductController extends Controller
 
   public function destroy($id){
     // 削除処理
-    // Log::info("info ログ!");
     $product = Product::find($id);
     $product->delete();
     return response()->json(['message' => '削除が成功しました']);
   }
 
-  // public function destroy(Request $request){
-  //   // 削除処理
-  //   $product = Product::findOrFail($request->id);
-  //   $product->delete();
-  //   return redirect(route('list'));
-  // }
 }

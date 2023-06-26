@@ -26,13 +26,13 @@
           <div class="formGroup-1">
             <!-- 商品名検索窓 -->
             <label for="name"> 商品名: </label>
-            <input type="search" name="keyword" value="{{request('search')}}" placeholder="商品を検索">
+            <input type="search" name="keyword" value="{{request('search')}}" placeholder="商品を検索" id="product_name">
             <!-- </div> //inputのvalueをvalue=” request (‘search’) ”にする事で入力すると値がURLに反映される -->
             <!-- // 商品名検索窓 -->
 
             <!-- ↓プルダウンでDBから会社名取得 -->
             <label for="name"> メーカー: </label>
-            <select name="company_id" type="number" placeholder="会社名">
+            <select id="company_id" name="company_id" type="number" placeholder="会社名">
               <option value="" selected hidden> 選択してください </option> <!-- 初期値を設定 -->
               @foreach ($companies as $company)
               <option value={{ $company->id }}>{{ $company->company_name }}</option>
@@ -44,19 +44,21 @@
           <div class="formGroup-2">
             <div class="priceRange">
               <label for="priceRangeLabel"> 価格： </label>
-              <input inputmode="decimal" name="priceRangeFrom" class="rangeArea">
+              <input inputmode="decimal" name="priceRangeFrom" class="rangeArea" id="priceRangeFrom">
               <label for="range"> 〜 </label>
-              <input inputmode="decimal" name="priceRangeTo" class="rangeArea">
+              <input inputmode="decimal" name="priceRangeTo" class="rangeArea" id="priceRangeTo">
             </div>
             <div class="stockRange">
               <label for="stockRangeLabel"> 在庫数： </label>
-              <input inputmode="decimal" name="stockRangeFrom" class="rangeArea">
+              <input inputmode="decimal" name="stockRangeFrom" class="rangeArea" id="stockRangeFrom">
               <label for="range"> 〜 </label>
-              <input inputmode="decimal" name="stockRangeTo" class="rangeArea">
+              <input inputmode="decimal" name="stockRangeTo" class="rangeArea" id="stockRangeTo">
             </div>
           </div>
           <!-- //価格・在庫検索 -->
-          <input type="submit" value="検索" class="searchBtn">
+          <button class = "searchBtn"> 検索 </button>
+          <!-- <input type="submit" value="検索" class="searchBtn"> -->
+          <!-- <input type="submit" value="検索" class="searchBtn"> -->
         </form>
 
         <button class="newRegisterBtn">
@@ -100,7 +102,7 @@
               <td>
                 <!-- <form action="{{route("destroy", $product->id)}}" method="post" data-id="{{$product->id}}">
                   @csrf -->
-                  <button data-product_id="{{$product->id}}" id="deleteBtn" class="deleteBtn" > 削除 </button>
+                <button data-product_id="{{$product->id}}" id="deleteBtn" class="deleteBtn"> 削除 </button>
                 <!-- </form> -->
               </td>
               <!-- <td> <a href="{{route("destroy", $product->id)}}"> 削除</a> </td> -->
