@@ -27,7 +27,7 @@ class ProductController extends Controller
     // viewのproductに'products'という変数で$productsを返す
 
 
-
+// aaaaaaaa
 
     // 別ブランチ草が生えるかテスト
 
