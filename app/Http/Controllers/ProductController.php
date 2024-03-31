@@ -25,6 +25,14 @@ class ProductController extends Controller
     ]);
     // return view('product', ['products' => $Products]);
     // viewのproductに'products'という変数で$productsを返す
+
+
+
+
+    
+
+
+    // 草が生えるかテスト
   }
 
   public function searchList(Request $request)

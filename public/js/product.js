@@ -40,9 +40,7 @@ document.addEventListener("DOMContentLoaded", function () {
             tbodyHtml += '<td>' + product.price + '</td>';
             tbodyHtml += '<td>' + product.stock + '</td>';
             tbodyHtml += '<td>' + (product['comment'] || '') + '</td>';
-            // tbodyHtml += '<td>' + product.company_name + '<td>'
             tbodyHtml += '<td>' + (product.company ? product.company.company_name : '') + '</td>';
-            // tbodyHtml += '<td>' + (product.company && product.company.company_name ? product.company.company_name : '') + '</td>';
             tbodyHtml += '<td>';
             tbodyHtml += '<button class="editBtn">';
             tbodyHtml += '<a href="http://localhost:8888/Vending-management/public/detail/' + product.id + '">詳細</a>';
